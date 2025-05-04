@@ -13,18 +13,110 @@ Think Tool is a lightweight MCP server built with Deno and FastMCP that provides
 
 ## Features
 
-- 🧠 **Structured Thinking**: Dedicated space for reasoning through complex problems
-- 🔍 **Policy Verification**: Check that planned actions comply with all relevant policies
-- 🛠️ **Domain-Specific Frameworks**: Create custom thinking steps for different scenarios
-- 📝 **Thought Logging**: Record thinking processes for transparency and debugging
+- **Structured Thinking**: Dedicated space for reasoning through complex problems
+- **Policy Verification**: Check that planned actions comply with all relevant policies
+- **Domain-Specific Frameworks**: Create custom thinking steps for different scenarios
+- **Thought Logging**: Record thinking processes for transparency and debugging
 
 ## Installation
 
-### Prerequisites
+### Using JSR (JavaScript Registry)
 
-- [Deno](https://deno.com/) 1.37.0 or newer
+The Think Tool MCP server is available on JSR. You can install it using one of the following methods:
 
-### Setup
+#### Deno Projects
+
+```bash
+deno add @sterling/think-tool
+```
+
+### Platform-Specific Installation
+
+#### Cursor
+
+Add the following to your Cursor MCP configuration file (`~/.cursor/mcp_servers.json`):
+
+```json
+{
+  "servers": [
+    {
+      "name": "Think Tool",
+      "enabled": true,
+      "server": {
+        "type": "command",
+        "command": "npx jsr@latest add @sterling/think-tool"
+      }
+    }
+  ]
+}
+```
+
+#### Windsurfer
+
+Add the following to your Windsurfer MCP configuration file:
+
+```json
+{
+  "servers": [
+    {
+      "name": "Think Tool",
+      "enabled": true,
+      "server": {
+        "type": "command",
+        "command": "npx jsr@latest add @sterling/think-tool"
+      }
+    }
+  ]
+}
+```
+
+#### Zed
+
+Add the following to your Zed configuration in `~/.config/zed/settings.json`:
+
+```json
+{
+  "assistant": {
+    "context_servers": [
+      {
+        "name": "Think Tool",
+        "enabled": true,
+        "server": {
+          "type": "command",
+          "command": "npx jsr@latest add @sterling/think-tool"
+        }
+      }
+    ]
+  }
+}
+```
+
+#### Claude Desktop
+
+1. Install and run the server globally:
+
+```bash
+npm install -g @jsr/sterling__think-tool
+```
+
+2. Add the following to your Claude Desktop MCP configuration file (`~/claude_desktop_config.json`):
+
+```json
+{
+  "mcp_servers": [
+    {
+      "name": "Think Tool",
+      "type": "command",
+      "command": "npx jsr@latest add @sterling/think-tool",
+      "enabled": true
+    }
+  ]
+}
+```
+
+### Self-Hosted Setup
+
+If you prefer to run the server directly:
 
 1. Clone the repository:
    ```bash
@@ -32,10 +124,20 @@ Think Tool is a lightweight MCP server built with Deno and FastMCP that provides
    cd think-tool
    ```
 
-2. Install dependencies (uses Deno's built-in package management):
+2. Install dependencies:
    ```bash
    deno cache server.ts
    ```
+
+3. Run the server:
+   ```bash
+   deno run server.ts
+   ```
+
+For development with hot-reloading:
+```bash
+deno task dev
+```
 
 ## Usage
 
