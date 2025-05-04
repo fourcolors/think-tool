@@ -30,7 +30,48 @@ The Think Tool MCP server is available on JSR. You can install it using one of t
 deno add @sterling/think-tool
 ```
 
+#### Node.js Projects (via NPX)
+
+```bash
+npx jsr add @sterling/think-tool
+```
+
 ### Platform-Specific Installation
+
+#### Claude Desktop
+
+To configure Think Tool with Claude Desktop:
+
+1. Open Claude Desktop and click on Claude menu → Settings
+2. In the Settings window, click on "Developer" in the left sidebar
+3. Click "Edit Config" to open the configuration file location
+4. Create or edit the `claude_desktop_config.json` file with the following content:
+
+```json
+{
+  "mcpServers": {
+    "think-tool": {
+      "command": "npx",
+      "args": ["jsr", "add", "@sterling/think-tool"],
+      "type": "stdio",
+      "pollingInterval": 30000,
+      "startupTimeout": 30000,
+      "restartOnFailure": true
+    }
+  }
+}
+```
+
+5. Save the file and restart Claude Desktop
+
+The configuration file is typically located at:
+- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- Windows: `%USERPROFILE%\AppData\Roaming\Claude\claude_desktop_config.json`
+- Linux: `~/.config/Claude/claude_desktop_config.json`
+
+##### Verification
+
+After restarting Claude Desktop, you should see a hammer icon at the bottom of the chat interface. Clicking this icon should show the "think" tool is available.
 
 #### Cursor
 
@@ -44,26 +85,8 @@ Add the following to your Cursor MCP configuration file (`~/.cursor/mcp_servers.
       "enabled": true,
       "server": {
         "type": "command",
-        "command": "npx jsr@latest add @sterling/think-tool"
-      }
-    }
-  ]
-}
-```
-
-#### Windsurfer
-
-Add the following to your Windsurfer MCP configuration file:
-
-```json
-{
-  "servers": [
-    {
-      "name": "Think Tool",
-      "enabled": true,
-      "server": {
-        "type": "command",
-        "command": "npx jsr@latest add @sterling/think-tool"
+        "command": "npx",
+        "args": ["jsr", "add", "@sterling/think-tool"]
       }
     }
   ]
@@ -83,34 +106,12 @@ Add the following to your Zed configuration in `~/.config/zed/settings.json`:
         "enabled": true,
         "server": {
           "type": "command",
-          "command": "npx jsr@latest add @sterling/think-tool"
+          "command": "npx",
+          "args": ["jsr", "add", "@sterling/think-tool"]
         }
       }
     ]
   }
-}
-```
-
-#### Claude Desktop
-
-1. Install and run the server globally:
-
-```bash
-npm install -g @jsr/sterling__think-tool
-```
-
-2. Add the following to your Claude Desktop MCP configuration file (`~/claude_desktop_config.json`):
-
-```json
-{
-  "mcp_servers": [
-    {
-      "name": "Think Tool",
-      "type": "command",
-      "command": "npx jsr@latest add @sterling/think-tool",
-      "enabled": true
-    }
-  ]
 }
 ```
 
@@ -139,34 +140,23 @@ For development with hot-reloading:
 deno task dev
 ```
 
+## Troubleshooting
+
+If you encounter issues with the Think Tool MCP server:
+
+1. Check the Claude Desktop logs:
+   - macOS: `tail -f ~/Library/Logs/Claude/mcp*.log`
+   - Windows: Check logs in `%USERPROFILE%\AppData\Roaming\Claude\logs`
+
+2. Ensure Node.js is installed:
+   - Verify with: `node --version`
+   - If not installed, download from [nodejs.org](https://nodejs.org/)
+
+3. Check that the paths in your configuration are correct and use absolute paths when necessary
+
+4. Restart Claude Desktop after making configuration changes
+
 ## Usage
-
-### Starting the Server
-
-Run the server using Deno:
-
-```bash
-deno run --allow-net server.ts
-```
-
-For development with hot-reloading:
-
-```bash
-deno task dev
-```
-
-### Integrating with AI Systems
-
-The Think Tool server exposes a `think` tool that can be used by compatible AI systems through the Model Context Protocol. The tool accepts a string parameter containing the thought process.
-
-Example integration:
-
-```typescript
-// AI system code
-const result = await mcp.invoke("think", {
-  thought: "Before answering, I need to check if I have all required information..."
-});
-```
 
 ### Creating Domain-Specific Thinking Frameworks
 
@@ -216,4 +206,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Acknowledgments
 
 - Built with [FastMCP](https://github.com/spencerc99/fastmcp)
-- Inspired by research on structured reasoning for AI systems
+- Inspired by [Anthropic's research on structured reasoning](https://www.anthropic.com/news/model-context-protocol) for AI systems
