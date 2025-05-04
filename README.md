@@ -65,6 +65,7 @@ To configure Think Tool with Claude Desktop:
 5. Save the file and restart Claude Desktop
 
 The configuration file is typically located at:
+
 - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
 - Windows: `%USERPROFILE%\AppData\Roaming\Claude\claude_desktop_config.json`
 - Linux: `~/.config/Claude/claude_desktop_config.json`
@@ -120,12 +121,14 @@ Add the following to your Zed configuration in `~/.config/zed/settings.json`:
 If you prefer to run the server directly:
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/sterling/think-tool.git
    cd think-tool
    ```
 
 2. Install dependencies:
+
    ```bash
    deno cache server.ts
    ```
@@ -136,6 +139,7 @@ If you prefer to run the server directly:
    ```
 
 For development with hot-reloading:
+
 ```bash
 deno task dev
 ```
@@ -145,10 +149,12 @@ deno task dev
 If you encounter issues with the Think Tool MCP server:
 
 1. Check the Claude Desktop logs:
+
    - macOS: `tail -f ~/Library/Logs/Claude/mcp*.log`
    - Windows: Check logs in `%USERPROFILE%\AppData\Roaming\Claude\logs`
 
 2. Ensure Node.js is installed:
+
    - Verify with: `node --version`
    - If not installed, download from [nodejs.org](https://nodejs.org/)
 
