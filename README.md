@@ -30,10 +30,10 @@ The Think Tool MCP server is available on JSR. You can install it using one of t
 deno add @sterling/think-tool
 ```
 
-#### Node.js Projects (via NPX)
+#### Direct Execution with Deno
 
 ```bash
-npx jsr add @sterling/think-tool
+deno run -A jsr:@sterling/think-tool
 ```
 
 ### Platform-Specific Installation
@@ -51,8 +51,8 @@ To configure Think Tool with Claude Desktop:
 {
   "mcpServers": {
     "think-tool": {
-      "command": "npx",
-      "args": ["jsr", "add", "@sterling/think-tool"],
+      "command": "deno",
+      "args": ["run", "-A", "jsr:@sterling/think-tool"],
       "type": "stdio",
       "pollingInterval": 30000,
       "startupTimeout": 30000,
@@ -86,8 +86,8 @@ Add the following to your Cursor MCP configuration file (`~/.cursor/mcp_servers.
       "enabled": true,
       "server": {
         "type": "command",
-        "command": "npx",
-        "args": ["jsr", "add", "@sterling/think-tool"]
+        "command": "deno",
+        "args": ["run", "-A", "jsr:@sterling/think-tool"]
       }
     }
   ]
@@ -107,8 +107,8 @@ Add the following to your Zed configuration in `~/.config/zed/settings.json`:
         "enabled": true,
         "server": {
           "type": "command",
-          "command": "npx",
-          "args": ["jsr", "add", "@sterling/think-tool"]
+          "command": "deno",
+          "args": ["run", "-A", "jsr:@sterling/think-tool"]
         }
       }
     ]
@@ -153,10 +153,10 @@ If you encounter issues with the Think Tool MCP server:
    - macOS: `tail -f ~/Library/Logs/Claude/mcp*.log`
    - Windows: Check logs in `%USERPROFILE%\AppData\Roaming\Claude\logs`
 
-2. Ensure Node.js is installed:
+2. Ensure Deno is installed:
 
-   - Verify with: `node --version`
-   - If not installed, download from [nodejs.org](https://nodejs.org/)
+   - Verify with: `deno --version`
+   - If not installed, follow instructions at [deno.land](https://deno.land/manual/getting_started/installation)
 
 3. Check that the paths in your configuration are correct and use absolute paths when necessary
 
