@@ -5,7 +5,7 @@
   "version": "0.0.2",
   "tags": ["thinking", "reasoning", "AI", "MCP", "deno"],
   "deployment": {
-    "localOnly": false,
+    "localOnly": true,
     "localInstaller": {
       "command": "deno",
       "args": ["run", "-A", "server.ts"]
@@ -22,10 +22,26 @@
   "examples": [
     {
       "name": "Structured Reasoning",
-      "description": "Use the Think Tool for structured reasoning",
+      "description": "Use the Think Tool for structured reasoning about complex problems",
       "tool": "think",
       "input": {
         "thought": "I need to analyze all the requirements of this task before proceeding with implementation."
+      }
+    },
+    {
+      "name": "Policy Verification",
+      "description": "Verify that planned actions comply with user policies",
+      "tool": "think",
+      "input": {
+        "thought": "Let me verify this action against the user's stated policies: 1) Must protect user privacy, 2) Should minimize API calls, 3) Should provide clear explanations."
+      }
+    },
+    {
+      "name": "Step-by-Step Analysis",
+      "description": "Break down complex problems into manageable steps",
+      "tool": "think",
+      "input": {
+        "thought": "This appears to be a multi-step problem. Let me break it down: 1) Understand the data format, 2) Identify the transformation needed, 3) Implement the algorithm, 4) Validate results against expected output."
       }
     }
   ],

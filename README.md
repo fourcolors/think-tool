@@ -18,26 +18,25 @@ Think Tool is a lightweight MCP server built with Deno and FastMCP that provides
 - **Domain-Specific Frameworks**: Create custom thinking steps for different scenarios
 - **Thought Logging**: Record thinking processes for transparency and debugging
 
-## Installation Options
+## Installation
 
-### Using Smithery (Recommended)
+### One-Click Installation with Smithery
 
-You can use Think Tool with Smithery in two ways:
-
-#### Option 1: Install locally via Smithery CLI
-
-The quickest way to get started is to install Think Tool locally via the Smithery CLI:
+The easiest way to install Think Tool is with the Smithery CLI:
 
 ```bash
 npx -y @smithery/cli install @sterling/think-tool --client claude
 ```
 
-This command:
-1. Downloads the Think Tool from the Smithery registry
-2. Automatically configures Claude Desktop to use it
-3. Runs the server locally on your machine
+This single command:
+- Installs the Think Tool on your local machine
+- Automatically configures Claude Desktop to use it
+- No API keys or complex setup required
 
-For other AI assistants:
+**After installation:** Restart Claude Desktop to see the 🔨 icon, indicating tools are available.
+
+#### For Other AI Assistants
+
 ```bash
 # For Cursor
 npx -y @smithery/cli install @sterling/think-tool --client cursor
@@ -46,22 +45,18 @@ npx -y @smithery/cli install @sterling/think-tool --client cursor
 npx -y @smithery/cli install @sterling/think-tool --client zed
 ```
 
-You'll need to restart your AI assistant after installation.
+### Manual Configuration
 
-#### Option 2: Deploy to Smithery Cloud
+If you prefer to configure your AI assistant manually:
 
-For a hosted solution that doesn't run on your local machine:
-
-1. Visit the Think Tool on Smithery at: `https://smithery.ai/servers/sterling/think-tool`
-2. Click "Deploy to My Account" to create your own instance
-3. Configure your AI assistant to use the Smithery URL
-
+**Claude Desktop** - Edit `claude_desktop_config.json`:
 ```json
 {
   "mcpServers": {
     "think-tool": {
-      "url": "https://your-smithery-deployment-url.smithery.ai",
-      "type": "http"
+      "command": "deno",
+      "args": ["run", "-A", "jsr:@sterling/think-tool"],
+      "type": "stdio"
     }
   }
 }

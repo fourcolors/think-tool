@@ -1,8 +1,6 @@
 # Smithery.ai configuration
-# Documentation: https://smithery.ai/docs/build/project-config/smithery.yaml
 
 startCommand:
-  # Using stdio transport type as configured in your server.ts
   type: stdio
   
   # Configuration schema for your MCP server
@@ -19,15 +17,15 @@ startCommand:
   # Command function to start your MCP server
   commandFunction: |-
     (config) => ({
-      "command": "./think-tool-bin",
-      "args": [],
+      "command": "deno",
+      "args": ["run", "-A", "server.ts"],
       "env": {
         "DENO_LOG_LEVEL": config.logLevel || "info",
         "DENO_NO_UPDATE_CHECK": "1"
       }
     })
 
-# Optional build configuration
+# Optional build configuration for Docker users
 build:
   dockerfile: "Dockerfile"
   dockerBuildPath: "."
