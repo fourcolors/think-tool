@@ -1,4 +1,4 @@
-# Think Tool
+# Think Tool (v0.0.2)
 
 A powerful Model Context Protocol (MCP) server that enhances AI reasoning capabilities by providing a structured thinking environment.
 
@@ -164,6 +164,14 @@ If you encounter issues with the Think Tool MCP server:
 
 ## Usage
 
+### Using the Think Tool
+
+The think tool serves as a scratchpad to:
+- List the specific rules that apply to the current request
+- Check if all required information is collected
+- Verify that planned actions comply with all policies
+- Iterate over tool results for correctness
+
 ### Creating Domain-Specific Thinking Frameworks
 
 For optimal use, create domain-specific thinking frameworks at the beginning of your AI conversations:
@@ -194,6 +202,13 @@ The server is built with:
 - **Deno**: A secure runtime for JavaScript and TypeScript
 - **FastMCP**: A framework for building Model Context Protocol servers
 - **Zod**: A TypeScript-first schema validation library
+
+### Available Prompts
+
+The server includes the following built-in prompts:
+
+- **thinkGeneralPrompt**: Provides general guidance for using the think tool
+- **thinkExamples**: Offers customizable thinking examples with parameters for intent, validations, and plan
 
 ## Contributing
 
