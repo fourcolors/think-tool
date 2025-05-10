@@ -1,0 +1,39 @@
+# Smithery.ai configuration
+# Documentation: https://smithery.ai/docs/build/project-config/smithery.yaml
+
+startCommand:
+  # Using stdio transport type as configured in your server.ts
+  type: stdio
+  
+  # Configuration schema for your MCP server
+  # This defines the configuration options that users can set when deploying your MCP
+  configSchema:
+    type: object
+    properties:
+      # Add any configuration options your MCP server needs here
+      # For example:
+      logLevel:
+        type: string
+        enum: ["error", "warn", "info", "debug"]
+        default: "info"
+        description: "Logging level for the Think Tool MCP"
+    required: []
+  
+  # Command function to start your MCP server
+  # This function receives the validated config and returns how to execute your binary
+  commandFunction: |-
+    (config) => ({
+      "command": "./think-tool-bin",
+      "args": [],
+      "env": {
+        "DENO_LOG_LEVEL": config.logLevel || "info",
+        "DENO_NO_UPDATE_CHECK": "1"
+      }
+    })
+
+# Optional build configuration
+build:
+  # Use our custom Dockerfile
+  dockerfile: "Dockerfile"
+  # Build from the repository root
+  dockerBuildPath: "."
