@@ -16,31 +16,19 @@ startCommand:
         description: "Logging level for the Think Tool MCP"
     required: []
   
-  # Command function to start your MCP server - for Docker deployment
+  # Command function to start your MCP server
   commandFunction: |-
     (config) => ({
-      "command": process.env.LOCAL_INSTALL ? "deno" : "./think-tool-bin",
-      "args": process.env.LOCAL_INSTALL ? ["run", "-A", "server.ts"] : [],
+      "command": "./think-tool-bin",
+      "args": [],
       "env": {
         "DENO_LOG_LEVEL": config.logLevel || "info",
         "DENO_NO_UPDATE_CHECK": "1"
       }
     })
 
-# Smithery metadata for local installation via CLI
-deployment:
-  localOnly: true
-  localCommand: "deno"
-  localArgs: ["run", "-A", "server.ts"]
-
 # Optional build configuration
 build:
   dockerfile: "Dockerfile"
   dockerBuildPath: "."
-  
-# For registry display
-specification:
-  name: "Think Tool"
-  description: "A structured thinking environment for AI assistants"
-  version: "0.0.2"
-  author: "sterling"
+

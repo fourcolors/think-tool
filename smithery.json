@@ -1,0 +1,36 @@
+{
+  "id": "sterling/think-tool",
+  "name": "Think Tool",
+  "description": "A structured thinking environment for AI assistants that enhances reasoning capabilities",
+  "version": "0.0.2",
+  "tags": ["thinking", "reasoning", "AI", "MCP", "deno"],
+  "deployment": {
+    "localOnly": false,
+    "localInstaller": {
+      "command": "deno",
+      "args": ["run", "-A", "server.ts"]
+    },
+    "requirements": [
+      {
+        "name": "logLevel",
+        "description": "Logging level for the Think Tool MCP",
+        "required": false,
+        "default": "info"
+      }
+    ]
+  },
+  "examples": [
+    {
+      "name": "Structured Reasoning",
+      "description": "Use the Think Tool for structured reasoning",
+      "tool": "think",
+      "input": {
+        "thought": "I need to analyze all the requirements of this task before proceeding with implementation."
+      }
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sterling/think-tool"
+  }
+}
