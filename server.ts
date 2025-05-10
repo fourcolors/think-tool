@@ -3,36 +3,85 @@ import { z } from "zod";
 
 const server = new FastMCP({
   name: "Think Tool",
-  version: "0.0.1",
+  version: "0.0.2",
   instructions: `## Using the think tool
 
 Before taking any action or responding to the user after receiving tool results, use the think tool as a scratchpad to:
 - List the specific rules that apply to the current request
 - Check if all required information is collected
 - Verify that the planned action complies with all policies
-- Iterate over tool results for correctness 
-
-Important: Before calling the think tool for the first time in a conversation, create domain-specific think_tool_steps (only if they haven't been created yet). These steps should be formatted as:
-
-<think_tool_example_1>
-[Scenario description]
-- [Information needed]
-- [Rules to check]
-  * [Rule details]
-- [Verification steps]
-- [Planned actions]
-</think_tool_example_1>
-
-<think_tool_example_2>
-[Different scenario]
-- [Different information needed]
-[...]
-</think_tool_example_2>
-
-Make these examples specific to the current domain and conversation context.`,
+- Iterate over tool results for correctness
+`,
 });
 
-// Add the "think" tool
+server.addPrompt({
+  name: "thinkGeneralPrompt",
+  description: "General prompt for the think tool",
+  load: async () => {
+    return await Promise.resolve(`
+      ## Using the think tool
+
+      Before taking any action or responding to the user after receiving tool results, use the think tool as a scratchpad to:
+      - List the specific rules that apply to the current request
+      - Check if all required information is collected
+      - Verify that the planned action complies with all policies
+      - Iterate over tool results for correctness
+    `);
+  },
+});
+
+/**
+ * Prompt template to add thinking steps
+ */
+server.addPrompt({
+  name: "thinkExamples",
+  description: "Writes a poem about a country",
+  load: async ({ intent, validations, plan }) => {
+    const thinkingTemplate = `
+
+      Here are some examples of what to iterate over inside the think tool:
+      <think_tool_example_1>
+      ${intent}
+
+      ${validations}
+
+      - Plan:
+      ${plan}
+      </think_tool_example_1>
+    `;
+
+    return await Promise.resolve(thinkingTemplate);
+  },
+  arguments: [
+    {
+      name: "intent",
+      description: "For example: User wants to booke a flight AB123",
+      required: true,
+    },
+    {
+      name: "validations",
+      description: `For example: 
+       - need to verify: user ID, reservation ID
+       - check cancellation rules:
+         * Is it within 24h of booking?
+         * If not, check ticket class and insurance
+       - verify no segments flown or are in the past
+       - plan: collect missing info, verify rules, get confirmation
+      `,
+      required: true,
+    },
+    {
+      name: "plan",
+      description: `For example: 
+       - collect missing info
+       - verify rules
+       - get confirmation
+      `,
+      required: true,
+    },
+  ],
+});
+
 server.addTool({
   name: "think",
   description:
@@ -42,7 +91,7 @@ server.addTool({
   }),
   execute: async (args, { log }) => {
     log.info("Thinking process", { thought: args.thought });
-    return "";
+    return await Promise.resolve("");
   },
 });
 
