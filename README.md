@@ -18,35 +18,74 @@ Think Tool is a lightweight MCP server built with Deno and FastMCP that provides
 - **Domain-Specific Frameworks**: Create custom thinking steps for different scenarios
 - **Thought Logging**: Record thinking processes for transparency and debugging
 
-## Installation
+## Installation Options
 
-### Using JSR (JavaScript Registry)
+### Using Smithery (Recommended)
 
-The Think Tool MCP server is available on JSR. You can install it using one of the following methods:
+You can use Think Tool with Smithery in two ways:
 
-#### Deno Projects
+#### Option 1: Install locally via Smithery CLI
+
+The quickest way to get started is to install Think Tool locally via the Smithery CLI:
 
 ```bash
+npx -y @smithery/cli install @sterling/think-tool --client claude
+```
+
+This command:
+1. Downloads the Think Tool from the Smithery registry
+2. Automatically configures Claude Desktop to use it
+3. Runs the server locally on your machine
+
+For other AI assistants:
+```bash
+# For Cursor
+npx -y @smithery/cli install @sterling/think-tool --client cursor
+
+# For Zed
+npx -y @smithery/cli install @sterling/think-tool --client zed
+```
+
+You'll need to restart your AI assistant after installation.
+
+#### Option 2: Deploy to Smithery Cloud
+
+For a hosted solution that doesn't run on your local machine:
+
+1. Visit the Think Tool on Smithery at: `https://smithery.ai/servers/sterling/think-tool`
+2. Click "Deploy to My Account" to create your own instance
+3. Configure your AI assistant to use the Smithery URL
+
+```json
+{
+  "mcpServers": {
+    "think-tool": {
+      "url": "https://your-smithery-deployment-url.smithery.ai",
+      "type": "http"
+    }
+  }
+}
+```
+
+### Alternative Installation Methods
+
+#### Using JSR (JavaScript Registry)
+
+The Think Tool MCP server is available on JSR for local installation:
+
+```bash
+# Direct execution with Deno
+deno run -A jsr:@sterling/think-tool
+
+# Add to Deno project
 deno add @sterling/think-tool
 ```
 
-#### Direct Execution with Deno
+#### Local Setup with AI Assistants
 
-```bash
-deno run -A jsr:@sterling/think-tool
-```
+To use the locally running Think Tool with AI assistants:
 
-### Platform-Specific Installation
-
-#### Claude Desktop
-
-To configure Think Tool with Claude Desktop:
-
-1. Open Claude Desktop and click on Claude menu → Settings
-2. In the Settings window, click on "Developer" in the left sidebar
-3. Click "Edit Config" to open the configuration file location
-4. Create or edit the `claude_desktop_config.json` file with the following content:
-
+**Claude Desktop** - Edit `claude_desktop_config.json`:
 ```json
 {
   "mcpServers": {
@@ -54,34 +93,32 @@ To configure Think Tool with Claude Desktop:
       "command": "deno",
       "args": ["run", "-A", "jsr:@sterling/think-tool"],
       "type": "stdio",
-      "pollingInterval": 30000,
-      "startupTimeout": 30000,
       "restartOnFailure": true
     }
   }
 }
 ```
 
-5. Save the file and restart Claude Desktop
-
-The configuration file is typically located at:
-
-- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-- Windows: `%USERPROFILE%\AppData\Roaming\Claude\claude_desktop_config.json`
-- Linux: `~/.config/Claude/claude_desktop_config.json`
-
-##### Verification
-
-After restarting Claude Desktop, you should see a hammer icon at the bottom of the chat interface. Clicking this icon should show the "think" tool is available.
-
-#### Cursor
-
-Add the following to your Cursor MCP configuration file (`~/.cursor/mcp_servers.json`):
-
+**Cursor** - Edit `~/.cursor/mcp_servers.json`:
 ```json
 {
-  "servers": [
-    {
+  "servers": [{
+    "name": "Think Tool",
+    "enabled": true,
+    "server": {
+      "type": "command",
+      "command": "deno",
+      "args": ["run", "-A", "jsr:@sterling/think-tool"]
+    }
+  }]
+}
+```
+
+**Zed** - Edit `~/.config/zed/settings.json`:
+```json
+{
+  "assistant": {
+    "context_servers": [{
       "name": "Think Tool",
       "enabled": true,
       "server": {
@@ -89,78 +126,21 @@ Add the following to your Cursor MCP configuration file (`~/.cursor/mcp_servers.
         "command": "deno",
         "args": ["run", "-A", "jsr:@sterling/think-tool"]
       }
-    }
-  ]
-}
-```
-
-#### Zed
-
-Add the following to your Zed configuration in `~/.config/zed/settings.json`:
-
-```json
-{
-  "assistant": {
-    "context_servers": [
-      {
-        "name": "Think Tool",
-        "enabled": true,
-        "server": {
-          "type": "command",
-          "command": "deno",
-          "args": ["run", "-A", "jsr:@sterling/think-tool"]
-        }
-      }
-    ]
+    }]
   }
 }
 ```
 
-### Self-Hosted Setup
-
-If you prefer to run the server directly:
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/sterling/think-tool.git
-   cd think-tool
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   deno cache server.ts
-   ```
-
-3. Run the server:
-   ```bash
-   deno run server.ts
-   ```
-
-For development with hot-reloading:
-
-```bash
-deno task dev
-```
-
 ## Troubleshooting
 
-If you encounter issues with the Think Tool MCP server:
+**For Smithery Deployments:**
+- Check your Smithery deployment status in the dashboard
+- Verify that your AI assistant is configured with the correct URL
 
-1. Check the Claude Desktop logs:
-
-   - macOS: `tail -f ~/Library/Logs/Claude/mcp*.log`
-   - Windows: Check logs in `%USERPROFILE%\AppData\Roaming\Claude\logs`
-
-2. Ensure Deno is installed:
-
-   - Verify with: `deno --version`
-   - If not installed, follow instructions at [deno.land](https://deno.land/manual/getting_started/installation)
-
-3. Check that the paths in your configuration are correct and use absolute paths when necessary
-
-4. Restart Claude Desktop after making configuration changes
+**For Local Installations:**
+- Check that Deno is properly installed (`deno --version`)
+- Review application logs for error messages
+- For Claude Desktop integration, check logs at `~/Library/Logs/Claude/mcp*.log` (macOS) or `%USERPROFILE%\AppData\Roaming\Claude\logs` (Windows)
 
 ## Usage
 
@@ -219,6 +199,39 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 3. Commit your changes (`git commit -m 'Add some amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+## Self-hosting
+
+### Using Docker
+
+The Think Tool can be containerized using Docker:
+
+```bash
+# Build the Docker image
+docker build -t think-tool-mcp .
+
+# Run the container
+docker run -it --rm think-tool-mcp
+```
+
+### Source Code Installation
+
+For development or direct installation:
+
+```bash
+# Clone the repository
+git clone https://github.com/sterling/think-tool.git
+cd think-tool
+
+# Install dependencies
+deno cache server.ts
+
+# Run the server
+deno run -A server.ts
+
+# For development with hot-reloading
+deno task dev
+```
 
 ## License
 
