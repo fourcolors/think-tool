@@ -1,4 +1,5 @@
 # Think Tool (v0.0.2)
+[![smithery badge](https://smithery.ai/badge/@sterling/think-tool)](https://smithery.ai/server/@sterling/think-tool)
 
 A powerful Model Context Protocol (MCP) server that enhances AI reasoning capabilities by providing a structured thinking environment.
 
@@ -19,6 +20,14 @@ Think Tool is a lightweight MCP server built with Deno and FastMCP that provides
 - **Thought Logging**: Record thinking processes for transparency and debugging
 
 ## Installation
+
+### Installing via Smithery
+
+To install think-tool for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@sterling/think-tool):
+
+```bash
+npx -y @smithery/cli install @sterling/think-tool --client claude
+```
 
 ### One-Click Installation with Smithery
 
