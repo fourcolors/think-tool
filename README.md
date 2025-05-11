@@ -1,5 +1,3 @@
-[![smithery badge](https://smithery.ai/badge/@fourcolors/think-tool)](https://smithery.ai/server/@fourcolors/think-tool)
-
 # Think Tool
 
 A simple Model Context Protocol (MCP) server that enhances AI reasoning by providing a structured thinking environment.
@@ -14,26 +12,7 @@ Think Tool gives AI assistants a dedicated "thinking space" to reason through co
 
 ## Installation
 
-There are two main ways to install Think Tool: using Smithery or setting it up manually.
-
-### Option 1: Install with Smithery (Recommended)
-
-```bash
-# For Claude Desktop
-npx -y @smithery/cli install @sterling/think-tool --client claude
-
-# For Cursor
-npx -y @smithery/cli install @sterling/think-tool --client cursor
-
-# For Zed
-npx -y @smithery/cli install @sterling/think-tool --client zed
-```
-
-After installation, restart your AI assistant to see the tools become available.
-
-### Option 2: Manual Installation
-
-#### Using JSR (JavaScript Registry)
+### Using JSR (JavaScript Registry)
 
 ```bash
 # Run directly with Deno
@@ -119,7 +98,7 @@ The think tool serves as a scratchpad for AI assistants to:
 
 - Check that Deno is properly installed (`deno --version`)
 - For Claude Desktop, check logs at `~/Library/Logs/Claude/mcp*.log` (macOS)
-- For Smithery deployments, check the dashboard status
+
 
 ## Contributing
 
