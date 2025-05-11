@@ -3,7 +3,7 @@ import { z } from "zod";
 
 const server = new FastMCP({
   name: "Think Tool",
-  version: "0.0.2",
+  version: "0.0.3",
   instructions: `## Using the think tool
 
 Before taking any action or responding to the user after receiving tool results, use the think tool as a scratchpad to:
