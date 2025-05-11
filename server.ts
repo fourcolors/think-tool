@@ -96,7 +96,11 @@ server.addTool({
 });
 
 server.start({
-  transportType: "stdio",
+  transportType: "httpStream",
+  httpStream: {
+    port: 8080,
+    endpoint: "/mcp",
+  },
 });
 
 console.error("Think Tool Server is running...");

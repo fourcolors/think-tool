@@ -4,8 +4,8 @@
     "jsr:@std/assert@*": "1.0.13",
     "jsr:@std/assert@1": "1.0.13",
     "jsr:@std/internal@^1.0.6": "1.0.6",
-    "npm:fastmcp@*": "1.23.2_zod-to-json-schema@3.24.5__zod@3.24.3_zod@3.24.3",
-    "npm:zod@*": "3.24.3"
+    "npm:fastmcp@1.27.4": "1.27.4_zod-to-json-schema@3.24.5__zod@3.24.3_zod@3.24.3",
+    "npm:zod@3.24.3": "3.24.3"
   },
   "jsr": {
     "@std/assert@1.0.13": {
@@ -19,8 +19,8 @@
     }
   },
   "npm": {
-    "@modelcontextprotocol/sdk@1.11.0_express@5.1.0_zod@3.24.3": {
-      "integrity": "sha512-k/1pb70eD638anoi0e8wUGAlbMJXyvdV4p62Ko+EZ7eBe1xMx8Uhak1R5DgfoofsK5IBBnRwsYGTaLZl+6/+RQ==",
+    "@modelcontextprotocol/sdk@1.11.1_express@5.1.0_zod@3.24.3": {
+      "integrity": "sha512-9LfmxKTb1v+vUS1/emSk1f5ePmTLkb9Le9AxOB5T0XM59EUumwcS45z05h7aiZx3GI0Bl7mjb3FMEglYj+acuQ==",
       "dependencies": [
         "content-type",
         "cors",
@@ -198,14 +198,14 @@
     "eventsource-parser@3.0.1": {
       "integrity": "sha512-VARTJ9CYeuQYb0pZEPbzi740OWFgpHe7AYJ2WFZVnUDUQp5Dk2yJUgF36YsZ81cOyxT0QxmXD2EQpapAouzWVA=="
     },
-    "eventsource@3.0.6": {
-      "integrity": "sha512-l19WpE2m9hSuyP06+FbuUUf1G+R0SFLrtQfbRb9PRr+oimOfxQhgGCbVaXg5IvZyyTThJsxh6L/srkMiCeBPDA==",
+    "eventsource@3.0.7": {
+      "integrity": "sha512-CRT1WTyuQoD771GW56XEZFQ/ZoSfWid1alKGDYMmkt2yl8UXrVR4pspqWNEcqKvVIzg6PAltWjxcSSPrboA4iA==",
       "dependencies": [
         "eventsource-parser"
       ]
     },
-    "execa@9.5.2": {
-      "integrity": "sha512-EHlpxMCpHWSAh1dgS6bVeoLAXGnJNdR93aabr4QCGbzOM73o5XmRfM/e5FUqsw3aagP8S8XEWUWFAxnRBnAF0Q==",
+    "execa@9.5.3": {
+      "integrity": "sha512-QFNnTvU3UjgWFy8Ef9iDHvIdcgZ344ebkwYx4/KLbR+CKQA4xBaHzv+iRpp86QfMHP8faFQLh8iOc57215y4Rg==",
       "dependencies": [
         "@sindresorhus/merge-streams",
         "cross-spawn",
@@ -259,8 +259,8 @@
         "vary"
       ]
     },
-    "fastmcp@1.23.2_zod-to-json-schema@3.24.5__zod@3.24.3_zod@3.24.3": {
-      "integrity": "sha512-ER+Buv5tlmzWRkvlWT3VE4R2tZEB0ru0JfbqXMWyKkVqGJA8Ti4JKeKzsiJlB9b0OPIwNvZLuoaSMGOooVAAmA==",
+    "fastmcp@1.27.4_zod-to-json-schema@3.24.5__zod@3.24.3_zod@3.24.3": {
+      "integrity": "sha512-4FPm5JfDlKSpwScbE56x6xyKGwRVuN+ckcvlAv8Y7efDNRKdOwMxeubdBAO2Uul4kXlzA39BQ34xTWQNek58uQ==",
       "dependencies": [
         "@modelcontextprotocol/sdk",
         "@standard-schema/spec",
@@ -412,8 +412,8 @@
     "math-intrinsics@1.1.0": {
       "integrity": "sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g=="
     },
-    "mcp-proxy@2.13.1": {
-      "integrity": "sha512-8e7aknoD9Q3+3OJ+2cpnBZ9T78VUSiwKjCRUio98y+kCsXFpbyAHQx95ZCffk+/Bhk5nTP0JuWX3edbj4zoHAQ==",
+    "mcp-proxy@2.14.0": {
+      "integrity": "sha512-SwPjTKtpXM8Hg3EfYEx77Eupy2d4BtH9iB9umxoj4rfNehUlK5sPAhbJvZqKL7DzOYCD77Kr4lTPpSJguxWlQQ==",
       "dependencies": [
         "@modelcontextprotocol/sdk",
         "eventsource",
@@ -741,8 +741,8 @@
   "workspace": {
     "dependencies": [
       "jsr:@std/assert@1",
-      "jsr:zod@*",
-      "npm:fastmcp@*"
+      "npm:fastmcp@1.27.4",
+      "npm:zod@3.24.3"
     ]
   }
 }
