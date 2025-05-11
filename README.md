@@ -1,43 +1,27 @@
-# Think Tool (v0.0.2)
+[![smithery badge](https://smithery.ai/badge/@fourcolors/think-tool)](https://smithery.ai/server/@fourcolors/think-tool)
 
-A powerful Model Context Protocol (MCP) server that enhances AI reasoning capabilities by providing a structured thinking environment.
+# Think Tool
 
-## Overview
+A simple Model Context Protocol (MCP) server that enhances AI reasoning by providing a structured thinking environment.
 
-Think Tool is a lightweight MCP server built with Deno and FastMCP that provides AI assistants with a dedicated "thinking space" to reason through complex problems before responding. It enables:
+## What is Think Tool?
 
-- Structured reasoning through complex tasks
-- Step-by-step evaluation of rules and requirements
-- Verification of planned actions against policies
-- Creation of domain-specific thinking frameworks
+Think Tool gives AI assistants a dedicated "thinking space" to reason through complex problems, providing:
 
-## Features
-
-- **Structured Thinking**: Dedicated space for reasoning through complex problems
-- **Policy Verification**: Check that planned actions comply with all relevant policies
-- **Domain-Specific Frameworks**: Create custom thinking steps for different scenarios
-- **Thought Logging**: Record thinking processes for transparency and debugging
+- Structured reasoning for complex tasks
+- Verification that planned actions comply with policies
+- Custom thinking frameworks for different scenarios
 
 ## Installation
 
-### One-Click Installation with Smithery
+There are two main ways to install Think Tool: using Smithery or setting it up manually.
 
-The easiest way to install Think Tool is with the Smithery CLI:
+### Option 1: Install with Smithery (Recommended)
 
 ```bash
+# For Claude Desktop
 npx -y @smithery/cli install @sterling/think-tool --client claude
-```
 
-This single command:
-- Installs the Think Tool on your local machine
-- Automatically configures Claude Desktop to use it
-- No API keys or complex setup required
-
-**After installation:** Restart Claude Desktop to see the 🔨 icon, indicating tools are available.
-
-#### For Other AI Assistants
-
-```bash
 # For Cursor
 npx -y @smithery/cli install @sterling/think-tool --client cursor
 
@@ -45,145 +29,97 @@ npx -y @smithery/cli install @sterling/think-tool --client cursor
 npx -y @smithery/cli install @sterling/think-tool --client zed
 ```
 
-### Manual Configuration
+After installation, restart your AI assistant to see the tools become available.
 
-If you prefer to configure your AI assistant manually:
-
-**Claude Desktop** - Edit `claude_desktop_config.json`:
-```json
-{
-  "mcpServers": {
-    "think-tool": {
-      "command": "deno",
-      "args": ["run", "-A", "jsr:@sterling/think-tool"],
-      "type": "stdio"
-    }
-  }
-}
-```
-
-### Alternative Installation Methods
+### Option 2: Manual Installation
 
 #### Using JSR (JavaScript Registry)
 
-The Think Tool MCP server is available on JSR for local installation:
-
 ```bash
-# Direct execution with Deno
+# Run directly with Deno
 deno run -A jsr:@sterling/think-tool
 
-# Add to Deno project
-deno add @sterling/think-tool
+# Or clone this repo and run locally
+git clone https://github.com/sterling/think-tool.git
+cd think-tool
+deno run -A server.ts
 ```
 
-#### Local Setup with AI Assistants
-
-To use the locally running Think Tool with AI assistants:
+#### Configure Your AI Assistant
 
 **Claude Desktop** - Edit `claude_desktop_config.json`:
+
 ```json
 {
   "mcpServers": {
     "think-tool": {
-      "command": "deno",
-      "args": ["run", "-A", "jsr:@sterling/think-tool"],
-      "type": "stdio",
-      "restartOnFailure": true
+      "type": "http",
+      "url": "http://localhost:8080/mcp"
     }
   }
 }
 ```
 
 **Cursor** - Edit `~/.cursor/mcp_servers.json`:
+
 ```json
 {
-  "servers": [{
-    "name": "Think Tool",
-    "enabled": true,
-    "server": {
-      "type": "command",
-      "command": "deno",
-      "args": ["run", "-A", "jsr:@sterling/think-tool"]
+  "servers": [
+    {
+      "name": "Think Tool",
+      "enabled": true,
+      "server": {
+        "type": "http",
+        "url": "http://localhost:8080/mcp"
+      }
     }
-  }]
+  ]
 }
 ```
 
 **Zed** - Edit `~/.config/zed/settings.json`:
+
 ```json
 {
   "assistant": {
-    "context_servers": [{
-      "name": "Think Tool",
-      "enabled": true,
-      "server": {
-        "type": "command",
-        "command": "deno",
-        "args": ["run", "-A", "jsr:@sterling/think-tool"]
+    "context_servers": [
+      {
+        "name": "Think Tool",
+        "enabled": true,
+        "server": {
+          "type": "http",
+          "url": "http://localhost:8080/mcp"
+        }
       }
-    }]
+    ]
   }
 }
 ```
 
-## Troubleshooting
-
-**For Smithery Deployments:**
-- Check your Smithery deployment status in the dashboard
-- Verify that your AI assistant is configured with the correct URL
-
-**For Local Installations:**
-- Check that Deno is properly installed (`deno --version`)
-- Review application logs for error messages
-- For Claude Desktop integration, check logs at `~/Library/Logs/Claude/mcp*.log` (macOS) or `%USERPROFILE%\AppData\Roaming\Claude\logs` (Windows)
-
 ## Usage
 
-### Using the Think Tool
+The think tool serves as a scratchpad for AI assistants to:
 
-The think tool serves as a scratchpad to:
-- List the specific rules that apply to the current request
-- Check if all required information is collected
-- Verify that planned actions comply with all policies
-- Iterate over tool results for correctness
-
-### Creating Domain-Specific Thinking Frameworks
-
-For optimal use, create domain-specific thinking frameworks at the beginning of your AI conversations:
-
-```
+```typescript
+// Example of using the think tool in your AI conversation
 <think_tool_step_1>
-Technical Implementation Framework:
-1. REQUIREMENTS: Define precise specifications and acceptance criteria
-2. RESEARCH: Gather all necessary information from documentation
-3. ARCHITECTURE: Design clean interfaces with proper separation of concerns
-4. IMPLEMENTATION: Write code following best practices
-...
+  Technical Implementation Framework: 1. REQUIREMENTS: Define specifications and
+  acceptance criteria 2. RESEARCH: Gather information from documentation 3.
+  ARCHITECTURE: Design clean interfaces with proper separation
 </think_tool_step_1>
-
-<think_tool_step_2>
-Problem Analysis:
-1. What are the precise requirements of this task?
-2. What information do I need to gather?
-3. What potential solutions should I consider?
-...
-</think_tool_step_2>
 ```
 
 ## Technical Details
 
-The server is built with:
+- Built with **Deno** and **FastMCP**
+- Uses **Zod** for TypeScript validation
+- Implements the Model Context Protocol (MCP) standard
 
-- **Deno**: A secure runtime for JavaScript and TypeScript
-- **FastMCP**: A framework for building Model Context Protocol servers
-- **Zod**: A TypeScript-first schema validation library
+## Troubleshooting
 
-### Available Prompts
-
-The server includes the following built-in prompts:
-
-- **thinkGeneralPrompt**: Provides general guidance for using the think tool
-- **thinkExamples**: Offers customizable thinking examples with parameters for intent, validations, and plan
+- Check that Deno is properly installed (`deno --version`)
+- For Claude Desktop, check logs at `~/Library/Logs/Claude/mcp*.log` (macOS)
+- For Smithery deployments, check the dashboard status
 
 ## Contributing
 
@@ -196,20 +132,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 5. Open a Pull Request
 
 ## Self-hosting
-
-### Using Docker
-
-The Think Tool can be containerized using Docker:
-
-```bash
-# Build the Docker image
-docker build -t think-tool-mcp .
-
-# Run the container
-docker run -it --rm think-tool-mcp
-```
-
-### Source Code Installation
 
 For development or direct installation:
 
