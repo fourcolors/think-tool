@@ -3,14 +3,18 @@ import { z } from "zod";
 
 const server = new FastMCP({
   name: "Think Tool",
-  version: "0.0.3",
+  version: "0.0.4",
   instructions: `## Using the think tool
 
-Before taking any action or responding to the user after receiving tool results, use the think tool as a scratchpad to:
-- List the specific rules that apply to the current request
-- Check if all required information is collected
-- Verify that the planned action complies with all policies
-- Iterate over tool results for correctness
+Use the think tool as a cognitive scratchpad for:
+- Chain-of-thought reasoning through complex problems
+- Planning your approach before taking actions
+- Reflecting on outcomes after completing tasks
+- Validating that requirements are met
+- Documenting discoveries and learnings
+- Creating cognitive checkpoints you can't skip
+
+The tool helps you think step-by-step, improving accuracy and compliance.
 `,
 });
 
@@ -21,65 +25,112 @@ server.addPrompt({
     return await Promise.resolve(`
       ## Using the think tool
 
-      Before taking any action or responding to the user after receiving tool results, use the think tool as a scratchpad to:
-      - List the specific rules that apply to the current request
-      - Check if all required information is collected
-      - Verify that the planned action complies with all policies
-      - Iterate over tool results for correctness
+      **Key Insight:** Without explicitly outputting thought processes, no deep thinking occurs. This tool creates mandatory cognitive checkpoints that prevent shortcuts and improve accuracy.
+
+      ### When to Use This Tool
+
+      **🔍 Before Complex Actions:**
+      - Breaking down multi-step problems into manageable pieces
+      - Validating all requirements are understood
+      - Identifying dependencies and potential blockers
+      - Planning the sequence of operations
+      - Considering edge cases and failure modes
+
+      **✅ After Completing Tasks:**
+      - Confirming all requirements were actually met
+      - Documenting unexpected discoveries or learnings
+      - Noting any technical debt introduced
+      - Identifying follow-up tasks or improvements
+      - Validating documentation was updated
+
+      **🧠 During Problem Solving:**
+      - Working through complex logic step-by-step
+      - Debugging by elimination of possibilities
+      - Comparing multiple solution approaches
+      - Caching important context across operations
+      - Creating decision audit trails
+
+      **⚠️ Critical Checkpoints:**
+      - Before making irreversible changes
+      - After encountering unexpected behavior
+      - When switching between different contexts
+      - Before responding with uncertainty
+      - After tool failures or errors
+
+      ### Format Examples
+
+      **Forward Thinking (built-in <thinking> tag, no tool needed):**
+      <thinking>
+      I need to implement authentication. Let me break this down:
+      1. Check existing auth patterns in the codebase
+      2. Set up JWT token generation
+      3. Add middleware for route protection
+      4. Test with both valid and expired tokens
+      </thinking>
+      
+      **Retrospective Reflection (uses think tool):**
+      <reflection>
+      mcp__think-tool__think "Authentication implementation complete:
+      - Added: JWT-based auth with refresh tokens
+      - Learned: Existing middleware made integration smooth
+      - Technical debt: Need to add rate limiting
+      - Next: Update API documentation with auth requirements"
+      </reflection>
+      
+      **Problem Solving (uses think tool for complex reasoning):**
+      mcp__think-tool__think "Debugging slow API responses:
+      - Symptom: 5+ second response times on user queries
+      - Hypothesis 1: Database queries missing indexes - CONFIRMED
+      - Hypothesis 2: N+1 query problem - Also found this
+      - Solution: Added compound indexes and query batching
+      - Result: Response time now <200ms"
+
+      Remember: <thinking> tags are for planning ahead, while the think tool creates checkpoints for reflection and complex reasoning.
     `);
   },
 });
 
 /**
- * Prompt template to add thinking steps
+ * Prompt template demonstrating reflection patterns
  */
 server.addPrompt({
-  name: "thinkExamples",
-  description: "Writes a poem about a country",
-  load: async ({ intent, validations, plan }) => {
-    const thinkingTemplate = `
+  name: "reflectionExample",
+  description: "Example of using reflection tags with the think tool",
+  load: async () => {
+    const reflectionTemplate = `
+      ## Reflection Pattern Examples
 
-      Here are some examples of what to iterate over inside the think tool:
-      <think_tool_example_1>
-      ${intent}
+      ### After completing a task:
+      <reflection>
+      Task completion reflection:
+      - Completed: Implemented user authentication with JWT tokens
+      - Learned: The existing middleware pattern made integration straightforward
+      - Updated: Added authentication setup to CLAUDE.md
+      - Next: Need to add rate limiting to protect the endpoints
+      </reflection>
 
-      ${validations}
+      ### After debugging an issue:
+      <reflection>
+      Debugging reflection:
+      - Issue: Users reported slow page loads
+      - Found: Database queries were missing indexes
+      - Fixed: Added compound indexes on frequently queried fields
+      - Documented: Updated performance troubleshooting guide
+      - Validated: Load times reduced from 3s to 200ms
+      </reflection>
 
-      - Plan:
-      ${plan}
-      </think_tool_example_1>
+      ### After code review:
+      <reflection>
+      Code review reflection:
+      - Reviewed: Pull request for payment integration
+      - Quality: Code follows established patterns, tests are comprehensive
+      - Concerns: Need to validate edge cases around currency conversion
+      - Action: Requested additional test cases before approval
+      </reflection>
     `;
 
-    return await Promise.resolve(thinkingTemplate);
+    return await Promise.resolve(reflectionTemplate);
   },
-  arguments: [
-    {
-      name: "intent",
-      description: "For example: User wants to booke a flight AB123",
-      required: true,
-    },
-    {
-      name: "validations",
-      description: `For example: 
-       - need to verify: user ID, reservation ID
-       - check cancellation rules:
-         * Is it within 24h of booking?
-         * If not, check ticket class and insurance
-       - verify no segments flown or are in the past
-       - plan: collect missing info, verify rules, get confirmation
-      `,
-      required: true,
-    },
-    {
-      name: "plan",
-      description: `For example: 
-       - collect missing info
-       - verify rules
-       - get confirmation
-      `,
-      required: true,
-    },
-  ],
 });
 
 server.addTool({
