@@ -4,19 +4,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Deno-based Model Context Protocol (MCP) server that provides a "think" tool for AI assistants to use as a structured reasoning environment.
+This is a Node.js-based Model Context Protocol (MCP) server that provides a "think" tool for AI assistants to use as a structured reasoning environment.
 
 ## Development Commands
 
 ```bash
 # Install dependencies
-deno cache server.ts
+npm install
 
 # Run the server
-deno run -A server.ts
+npm start
 
 # Development mode with hot-reloading
-deno task dev
+npm run dev
 ```
 
 ## Architecture
@@ -29,9 +29,9 @@ deno task dev
 - Two prompts: `thinkGeneralPrompt` and `thinkExamples` for guiding thinking patterns
 
 ### Tech Stack
-- **Runtime**: Deno
-- **MCP Framework**: FastMCP (npm:fastmcp@1.27.4)
-- **Validation**: Zod (npm:zod@3.24.3)
+- **Runtime**: Node.js
+- **MCP Framework**: FastMCP (^1.27.4)
+- **Validation**: Zod (^3.24.3)
 - **Protocol**: HTTP streaming for MCP communication
 
 ### Key Implementation Details
