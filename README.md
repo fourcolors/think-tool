@@ -1,6 +1,6 @@
 # MCP Reflection Tool
 
-A Model Context Protocol (MCP) server that provides a "think" tool for AI assistants to create cognitive checkpoints and structured reasoning. This tool helps LLMs maintain context, reflect on their work, and think through complex problems systematically.
+A Model Context Protocol (MCP) server that provides a "reflect" tool for AI assistants to create cognitive checkpoints and structured reasoning. This tool helps LLMs maintain context, reflect on their work, and think through complex problems systematically.
 
 ## Why Use This Tool?
 
@@ -8,7 +8,7 @@ A Model Context Protocol (MCP) server that provides a "think" tool for AI assist
 
 ## Features
 
-- 🧠 **Structured Reasoning**: Forces AI assistants to think step-by-step through complex problems
+- 🧠 **Structured Reasoning**: Forces AI assistants to reflect step-by-step through complex problems
 - ✅ **Task Validation**: Creates checkpoints to verify requirements are met
 - 📝 **Learning Documentation**: Captures discoveries and insights during problem-solving
 - 🔍 **Debugging Aid**: Helps work through issues systematically by elimination
@@ -30,25 +30,13 @@ npx mcp-reflection-tool
 
 ### Claude Code
 
-Add to your Claude Code MCP settings file:
+Add the server using a single command:
 
-**Location by OS:**
-- **macOS**: `~/Library/Application Support/Claude/claude_code_config.json`  
-- **Windows**: `%APPDATA%\Claude\claude_code_config.json`  
-- **Linux**: `~/.config/Claude/claude_code_config.json`
-
-```json
-{
-  "mcpServers": {
-    "reflection-tool": {
-      "command": "npx",
-      "args": ["mcp-reflection-tool"]
-    }
-  }
-}
+```bash
+mcp add npx mcp-reflection-tool
 ```
 
-After updating, restart Claude Code completely.
+This will automatically configure the server in your Claude Code settings. After running the command, restart Claude Code completely.
 
 ### Cursor
 
@@ -137,11 +125,11 @@ Then configure your AI tool to connect to:
 
 ## Usage Examples
 
-Once installed, the AI assistant will have access to the `think` tool. Here are examples of how it gets used:
+Once installed, the AI assistant will have access to the `reflect` tool. Here are examples of how it gets used:
 
 ### Before Complex Actions
 ```
-Using think tool: "Breaking down authentication implementation:
+Using reflection tool: "Breaking down authentication implementation:
 1. Check existing auth patterns in codebase
 2. Set up JWT token generation  
 3. Add middleware for route protection
@@ -150,7 +138,7 @@ Using think tool: "Breaking down authentication implementation:
 
 ### After Completing Tasks
 ```
-Using think tool: "Task completion check:
+Using reflection tool: "Task completion check:
 - Completed: Implemented user authentication with JWT
 - Learned: Existing middleware made integration smooth
 - Technical debt: Need to add rate limiting
@@ -159,7 +147,7 @@ Using think tool: "Task completion check:
 
 ### During Problem Solving
 ```
-Using think tool: "Debugging slow API responses:
+Using reflection tool: "Debugging slow API responses:
 - Symptom: 5+ second response times
 - Hypothesis 1: Missing database indexes - CONFIRMED
 - Hypothesis 2: N+1 query problem - Also found
@@ -238,9 +226,9 @@ npm start
 
 ## How It Works
 
-The reflection tool implements the Model Context Protocol (MCP) to provide a standardized way for AI assistants to access external tools. When an AI assistant needs to think through a problem:
+The reflection tool implements the Model Context Protocol (MCP) to provide a standardized way for AI assistants to access external tools. When an AI assistant needs to reflect on a problem:
 
-1. The AI calls the `think` tool with its reasoning
+1. The AI calls the `reflect` tool with its reasoning
 2. The tool logs the thought process to the server console
 3. The tool acknowledges the checkpoint back to the AI
 4. This creates a cognitive checkpoint that improves reasoning quality

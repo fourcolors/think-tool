@@ -51,14 +51,14 @@ Planning implementation approach:
 </thinking>
 ```
 
-**Retrospective Reflection (use `<reflection>` with think tool):**
+**Retrospective Reflection (use `<reflection>` with reflection tool):**
 ```xml
 <reflection>
-mcp__think-tool__think "Task completion check:
+Task completion check:
 - Completed: [what was done]
 - Validated: [requirements met]
 - Learned: [discoveries]
-- Next: [follow-up tasks]"
+- Next: [follow-up tasks]
 </reflection>
 ```
 
@@ -69,4 +69,4 @@ mcp__think-tool__think "Task completion check:
 - 🧠 **During problem solving** - Debug systematically, compare approaches
 - ⚠️ **Critical moments** - Before irreversible changes, after errors
 
-The tool logs thoughts to the server console for debugging and audit purposes, but doesn't interact with external systems.
+The reflection tool logs thoughts to the server console for debugging and audit purposes, but doesn't interact with external systems.

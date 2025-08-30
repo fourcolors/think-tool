@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "reflection-tool": {
+      "type": "stdio",
+      "command": "deno",
+      "args": ["run", "-A", "server.ts"],
+      "env": {}
+    }
+  }
+}

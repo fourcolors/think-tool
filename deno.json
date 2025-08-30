@@ -1,5 +1,5 @@
 {
-  "name": "@sterling/think-tool",
+  "name": "@sterling/reflection-tool",
   "version": "0.1.4",
   "license": "MIT",
   "exports": "./server.ts",

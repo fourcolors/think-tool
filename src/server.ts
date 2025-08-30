@@ -2,11 +2,11 @@ import { FastMCP } from "fastmcp";
 import { z } from "zod";
 
 const server = new FastMCP({
-  name: "Think Tool",
+  name: "Reflection Tool",
   version: "0.0.4",
-  instructions: `## Using the think tool
+  instructions: `## Using the reflection tool
 
-Use the think tool as a cognitive scratchpad for:
+Use the reflection tool as a cognitive scratchpad for:
 - Chain-of-thought reasoning through complex problems
 - Planning your approach before taking actions
 - Reflecting on outcomes after completing tasks
@@ -23,7 +23,7 @@ server.addPrompt({
   description: "General prompt for the think tool",
   load: async () => {
     return await Promise.resolve(`
-      ## Using the think tool
+      ## Using the reflection tool
 
       **Key Insight:** Without explicitly outputting thought processes, no deep thinking occurs. This tool creates mandatory cognitive checkpoints that prevent shortcuts and improve accuracy.
 
@@ -68,24 +68,26 @@ server.addPrompt({
       4. Test with both valid and expired tokens
       </thinking>
       
-      **Retrospective Reflection (uses think tool):**
+      **Retrospective Reflection (uses reflection tool):**
       <reflection>
-      mcp__think-tool__think "Authentication implementation complete:
+      Authentication implementation complete:
       - Added: JWT-based auth with refresh tokens
       - Learned: Existing middleware made integration smooth
       - Technical debt: Need to add rate limiting
-      - Next: Update API documentation with auth requirements"
+      - Next: Update API documentation with auth requirements
       </reflection>
       
-      **Problem Solving (uses think tool for complex reasoning):**
-      mcp__think-tool__think "Debugging slow API responses:
+      **Problem Solving (uses reflection tool for complex reasoning):**
+      <reflect>
+      Debugging slow API responses:
       - Symptom: 5+ second response times on user queries
       - Hypothesis 1: Database queries missing indexes - CONFIRMED
       - Hypothesis 2: N+1 query problem - Also found this
       - Solution: Added compound indexes and query batching
-      - Result: Response time now <200ms"
+      - Result: Response time now <200ms
+      </reflect>
 
-      Remember: <thinking> tags are for planning ahead, while the think tool creates checkpoints for reflection and complex reasoning.
+      Remember: <thinking> tags are for planning ahead, while the reflection tool creates checkpoints for reflection and complex reasoning.
     `);
   },
 });
@@ -134,7 +136,7 @@ server.addPrompt({
 });
 
 server.addTool({
-  name: "think",
+  name: "reflect",
   description:
     "Use the tool to think about something. It will not obtain new information or change the database, but just append the thought to the log. Use it when complex reasoning or some cache memory is needed.",
   parameters: z.object({
@@ -154,4 +156,4 @@ server.start({
   },
 });
 
-console.error("Think Tool Server is running...");
+console.error("Reflection Tool Server is running...");
