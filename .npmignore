@@ -1,0 +1,30 @@
+# Source files (we only ship dist)
+src/
+*.ts
+!dist/*.d.ts
+
+# Development files
+deno.json
+deno.lock
+mise.toml
+workbench/
+.git/
+.gitignore
+tsconfig.json
+bun.lockb
+server.js
+
+# Documentation that's not needed in the package
+CLAUDE.md
+
+# Logs and temp files
+*.log
+.DS_Store
+.env
+.env.local
+
+# Test files
+test/
+tests/
+*.test.js
+*.spec.js

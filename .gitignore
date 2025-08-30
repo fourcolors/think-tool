@@ -1,0 +1,9 @@
+node_modules/
+bun.lockb
+.env
+.env.local
+dist/
+build/
+*.log
+.DS_Store
+server.js

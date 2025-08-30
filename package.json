@@ -1,0 +1,56 @@
+{
+  "name": "mcp-reflection-tool",
+  "version": "0.1.5",
+  "type": "module",
+  "description": "MCP server providing a reflection tool for AI assistants to create cognitive checkpoints and structured reasoning",
+  "main": "dist/server.js",
+  "types": "dist/server.d.ts",
+  "bin": {
+    "mcp-reflection-tool": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "dev": "bun run --watch src/server.ts",
+    "build": "bun build src/server.ts --outfile dist/server.js --target node --external fastmcp --external zod && bun run postbuild",
+    "postbuild": "echo '#!/usr/bin/env node' | cat - dist/server.js > dist/cli.js && chmod +x dist/cli.js && cp dist/server.js dist/server.mjs",
+    "start": "bun run dist/server.js",
+    "prepublishOnly": "bun run build",
+    "test": "echo \"No tests yet\""
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "thinking",
+    "reasoning",
+    "llm",
+    "tool"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "fastmcp": "^1.27.4",
+    "zod": "^3.24.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sterling/think-tool.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sterling/think-tool/issues"
+  },
+  "homepage": "https://github.com/sterling/think-tool#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}
