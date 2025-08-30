@@ -743,6 +743,14 @@
       "jsr:@std/assert@1",
       "npm:fastmcp@1.27.4",
       "npm:zod@3.24.3"
-    ]
+    ],
+    "packageJson": {
+      "dependencies": [
+        "npm:@types/node@20",
+        "npm:fastmcp@^1.27.4",
+        "npm:typescript@5",
+        "npm:zod@^3.24.3"
+      ]
+    }
   }
 }

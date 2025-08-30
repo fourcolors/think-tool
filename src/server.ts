@@ -67,7 +67,7 @@ server.addPrompt({
       3. Add middleware for route protection
       4. Test with both valid and expired tokens
       </thinking>
-      
+
       **Retrospective Reflection (uses reflection tool):**
       <reflection>
       Authentication implementation complete:
@@ -76,7 +76,7 @@ server.addPrompt({
       - Technical debt: Need to add rate limiting
       - Next: Update API documentation with auth requirements
       </reflection>
-      
+
       **Problem Solving (uses reflection tool for complex reasoning):**
       <reflect>
       Debugging slow API responses:
@@ -155,5 +155,3 @@ server.start({
     endpoint: "/mcp",
   },
 });
-
-console.error("Reflection Tool Server is running...");
