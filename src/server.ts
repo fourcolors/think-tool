@@ -138,7 +138,7 @@ server.addPrompt({
 server.addTool({
   name: "reflect",
   description:
-    "Use the tool to think about something. It will not obtain new information or change the database, but just append the thought to the log. Use it when complex reasoning or some cache memory is needed.",
+    "Use the tool to think or reflect about something. It will not obtain new information or change the database, but just append the thought to the log. Use it when complex reasoning or some cache memory is needed.",
   parameters: z.object({
     thought: z.string().describe("A thought to think about."),
   }),
