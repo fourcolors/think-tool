@@ -3,7 +3,7 @@ import { z } from "zod";
 
 const server = new FastMCP({
   name: "Reflection Tool",
-  version: "0.0.4",
+  version: "0.1.19",
   instructions: `## Using the reflection tool
 
 Use the reflection tool as a cognitive scratchpad for:

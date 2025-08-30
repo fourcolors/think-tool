@@ -109,19 +109,20 @@ Reload VS Code window after configuration.
 
 ### Alternative: Manual Server Mode
 
-If your AI tool doesn't support command-based MCP, run the server manually:
+The server runs via stdio by default. If you need HTTP mode, use environment variables:
 
 ```bash
-# Start server on default port 8080
+# Start server in stdio mode (default)
 npx mcp-reflection-tool
 
-# Or specify a custom port
-PORT=3000 npx mcp-reflection-tool
+# Start in HTTP mode on port 8080
+HTTP=true npx mcp-reflection-tool
+
+# Start in HTTP mode on custom port
+HTTP=true PORT=3000 npx mcp-reflection-tool
 ```
 
-Then configure your AI tool to connect to:
-- Default: `http://localhost:8080/mcp`
-- Custom port: `http://localhost:3000/mcp`
+Most modern AI tools support stdio mode automatically.
 
 ## Usage Examples
 
@@ -157,12 +158,16 @@ Using reflection tool: "Debugging slow API responses:
 
 ## When the Tool Gets Used
 
-The AI assistant will automatically use this tool for:
+The AI assistant will automatically use this tool as a cognitive scratchpad for:
 
-- 🔍 **Before Complex Actions**: Breaking down multi-step problems
-- ✅ **After Completing Tasks**: Confirming requirements were met
-- 🧠 **During Problem Solving**: Working through complex logic step-by-step
-- ⚠️ **Critical Checkpoints**: Before irreversible changes or after errors
+- 🔍 **Chain-of-thought reasoning** through complex problems
+- 📋 **Planning your approach** before taking actions
+- ✅ **Reflecting on outcomes** after completing tasks
+- ✔️ **Validating that requirements** are met
+- 📝 **Documenting discoveries** and learnings
+- 🎯 **Creating cognitive checkpoints** you can't skip
+
+This helps the AI think step-by-step, improving accuracy and compliance.
 
 ## Development
 
@@ -273,8 +278,8 @@ npm list -g mcp-reflection-tool
 # Test the server directly
 npx mcp-reflection-tool
 
-# Check server health (while running)
-curl http://localhost:8080/mcp
+# Test stdio mode
+echo '{"jsonrpc":"2.0","method":"initialize","id":1}' | npx mcp-reflection-tool
 ```
 
 ## Contributing
