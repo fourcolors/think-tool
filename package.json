@@ -1,6 +1,6 @@
 {
   "name": "mcp-reflection-tool",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "type": "module",
   "description": "MCP server providing a reflection tool for AI assistants to create cognitive checkpoints and structured reasoning",
   "main": "dist/server.js",

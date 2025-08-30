@@ -149,9 +149,5 @@ server.addTool({
 });
 
 server.start({
-  transportType: "httpStream",
-  httpStream: {
-    port: 8080,
-    endpoint: "/mcp",
-  },
+  transportType: "stdio",
 });
